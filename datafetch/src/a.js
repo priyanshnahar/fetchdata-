@@ -1,10 +1,19 @@
-function a (){
-    let x = "world";
-    console.log("hello");
-    function b (){
-        console.log(x);
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+
+function App() {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const result = await axios.get(
+        "https://jsonplaceholder.typicode.com/posts"
+      );
+      setPosts(result.data);
     }
-    b()
+    console.log (fetchData());
+  });
+  return <div></div>;
 }
 
-a();
+export default App;

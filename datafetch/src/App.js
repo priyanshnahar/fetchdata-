@@ -1,26 +1,39 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 function App() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
-      const result = await axios.get('https://jsonplaceholder.typicode.com/posts');
-      setPosts(result.data);
+      const url = await axios.get("https://jsonplaceholder.typicode.com/posts");
+      setPosts(url.data);
     }
     fetchData();
   }, []);
-
   return (
-    <div>
-      {posts.map(post => (
-        <div key={post.id}>
-          <h2>{post.title}</h2>
-          <p>{post.body}</p>
-        </div>
-      ))}
-    </div>
+  <div>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Title</th>
+          <th>Body</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          posts.map(post => (
+            <tr key={post.id}>
+              <td>{post.id}</td>
+              <td>{post.title}</td>
+              <td>{post.body}</td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
   );
 }
 
