@@ -5,6 +5,8 @@ function App() {
   const [data, setData] = useState([]);
   const [title, setTitle] = useState();
   const [body, setBody] = useState();
+
+  const addDatat = 
   useEffect(() => {
     axios
       .get("https://jsonplaceholder.typicode.com/posts")
@@ -21,10 +23,16 @@ function App() {
         title,
         body,
       })
-      .then((res) => console.log("posting dat", res))
+      .then((res) => {
+        console.log("posting data", res);
+        setData([...data, res.data]); 
+        setTitle(""); 
+        setBody(""); 
+      })
       .catch((err) => console.log(err));
   };
-  const arr = data.map((data, index) => {
+
+  const arr = data.map((data) => {
     return (
       <tr>
         <td style={{ border: "1px solid black" }}>{data.id}</td>
@@ -59,6 +67,8 @@ function App() {
           <th style={{ border: "1px solid black" }}>BODY</th>
         </tr>
         {arr}
+
+
       </table>
     </>
   );
