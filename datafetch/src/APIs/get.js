@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-function App() {
+function Get() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -11,9 +11,20 @@ function App() {
       );
       setPosts(result.data);
     }
-    console.log (fetchData());
-  });
-  return <div></div>;
+
+    fetchData();
+  }, []);
+
+  return (
+    <>
+      {posts.map(post => (
+        <div key={post.id}>
+          <h1>{post.title}</h1>
+          <p>{post.body}</p>
+        </div>
+      ))}
+    </>
+  );
 }
 
-export default App;
+export default Get;
